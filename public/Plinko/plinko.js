@@ -1,0 +1,189 @@
+const canvas = document.getElementById('plinkoCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = 1000;
+canvas.height = 600;
+
+const gravity = 0.15;
+const damping = 0.75;
+const pegRadius = 5;
+const discRadius = 10;
+const pegs = [];
+const discs = [];
+const slots = [];
+let score = 0;
+let balance = 500;
+
+document.getElementById('cashOutButton').addEventListener('click', () => {
+    balance += score;
+    score = 0;
+    document.getElementById('balance').innerText = `Balance: ${balance}`;
+    document.getElementById('score').innerText = `Score: ${score}`;
+});
+
+function createPegGrid() {
+    const rows = 10;
+    const cols = 15;
+    const startX = canvas.width / 2;
+    const startY = 50;
+    const spacing = 50;
+
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col <= row; col++) {
+            let x = startX - (row * spacing / 2) + (col * spacing);
+            let y = startY + (row * spacing);
+            pegs.push({ x, y });
+        }
+    }
+}
+
+function createPointSlots() {
+    const slotWidth = canvas.width / 14;
+    const multipliers = [0, 0, 0, 0.25, 20, 1, 0.5, 0.5, 1, 20, 0.25, 0, 0, 0, 0];
+
+    for (let i = 0; i < 14; i++) {
+        slots.push({ 
+            x: i * slotWidth, 
+            width: slotWidth, 
+            points: multipliers[i] * 1, 
+            animationProgress: 0 // Track bounce animation
+        });
+    }
+}
+
+function dropDisc(x) {
+    discs.push({ x, y: 0, vx: 0, vy: 0 });
+}
+
+function resolveCollision(disc, peg) {
+    let dx = disc.x - peg.x;
+    let dy = disc.y - peg.y;
+    let distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < pegRadius + discRadius) {
+        let angle = Math.atan2(dy, dx);
+        let overlap = pegRadius + discRadius - distance;
+
+        disc.x += Math.cos(angle) * overlap;
+        disc.y += Math.sin(angle) * overlap;
+
+        let normalX = Math.cos(angle);
+        let normalY = Math.sin(angle);
+        let dotProduct = disc.vx * normalX + disc.vy * normalY;
+
+        disc.vx -= (1 + damping) * dotProduct * normalX;
+        disc.vy -= (1 + damping) * dotProduct * normalY;
+
+        // Add randomness to avoid repeating patterns
+        disc.vx += (Math.random() - 0.5) * 0.5;
+    }
+}
+
+function update() {
+    if (balance <= 0) {
+        alert("Insufficient balance to play.");
+        return;
+    }
+    
+    discs.forEach(disc => {
+        disc.vy += gravity;
+        disc.y += disc.vy;
+        disc.x += disc.vx;
+
+        pegs.forEach(peg => {
+            resolveCollision(disc, peg);
+        });
+
+        disc.vx *= 0.98;
+        disc.vy *= 0.98;
+
+        if (disc.x - discRadius < 0 || disc.x + discRadius > canvas.width) {
+            disc.vx *= -0.5;
+            disc.x = Math.max(discRadius, Math.min(canvas.width - discRadius, disc.x));
+        }
+
+        if (disc.y + discRadius >= canvas.height - 50) {
+            let landedSlot = slots.find(slot => disc.x > slot.x && disc.x < slot.x + slot.width);
+            if (landedSlot) {
+                score += landedSlot.points * 50;
+                document.getElementById('score').innerText = `Score: ${score}`;
+                balance -= 50;
+                document.getElementById('balance').innerText = `Balance: ${balance}`;
+
+                // Start bounce animation for the bin
+                landedSlot.animationProgress = 1.0;
+            }
+            discs.splice(discs.indexOf(disc), 1);
+        }
+    });
+
+    // Animate the bin bounce effect
+    slots.forEach(slot => {
+        if (slot.animationProgress > 0) {
+            slot.animationProgress -= 0.05; // Smoothly shrink back to normal
+        }
+    });
+}
+
+function drawRoundedRect(x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    ctx.fill();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw pegs (White)
+    pegs.forEach(peg => {
+        ctx.beginPath();
+        ctx.arc(peg.x, peg.y, pegRadius, 0, Math.PI * 2);
+        ctx.fillStyle = '#F8F8FF';
+        ctx.fill();
+    });
+
+    // Draw discs
+    discs.forEach(disc => {
+        ctx.beginPath();
+        ctx.arc(disc.x, disc.y, discRadius, 0, Math.PI * 2);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+    });
+
+    // Draw bins (Light purple + bounce effect)
+    slots.forEach(slot => {
+        let bounceHeight = slot.animationProgress * 10; // Expand bin when a ball lands in it
+
+        ctx.fillStyle = '#A372D1';
+        drawRoundedRect(slot.x, canvas.height - 50 - bounceHeight, slot.width, 50 + bounceHeight, 10);
+
+        // Draw text on bin
+        ctx.fillStyle = 'white';
+        ctx.font = '16px Arial';
+        ctx.fillText(slot.points, slot.x + slot.width / 3, canvas.height - 20 - bounceHeight);
+    });
+}
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    dropDisc(e.clientX - rect.left);
+});
+
+createPegGrid();
+createPointSlots();
+gameLoop();

@@ -1,0 +1,25 @@
+<!-- TODO -->
+<!-- 1. Add cookie/user tracking to trace account balance-->
+<!-- 5. improve css -->
+<!-- 6. file seperation for security and prevention of injection or modification -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plinko Game</title>
+    <link rel="stylesheet" href="plinko.css">
+</head>
+<body>
+    <div style="position: fixed; top: 20px; right: 20px; display: flex; flex-direction: column; align-items: center;">
+        <div>50pts / Ball</div>
+        <div id="balance">Balance: 500</div> <br>
+        <button id="cashOutButton">Cash Out</button>
+        <br>
+        <div id="score">Score: 0</div>
+    </div>
+    <canvas id="plinkoCanvas"></canvas>
+    <script src="plinko.js"></script>
+</body>
+</html>
