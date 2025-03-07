@@ -1,0 +1,122 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a0529; /* Darker casino-style theme */
+    color: #DECAB6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Title */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #F2E6FF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Game container */
+#game-container {
+    width: 90%;
+    max-width: 600px;
+    background: #2C0A47;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Balance display */
+#balance-container {
+    background-color: #4D165A;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #A372D1;
+}
+
+#balance {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Cash Out button */
+button {
+    background: linear-gradient(135deg, #8B008B, #6F0081);
+    color: #F2E6FF;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #57006A, #3A004F);
+    transform: scale(1.05);
+}
+
+/* Plinko Board */
+#plinko-board {
+    background: #3A006F;
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pegs inside Plinko board */
+.peg {
+    width: 12px;
+    height: 12px;
+    background-color: #F8F8FF; /* Soft white for visibility */
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Slots at the bottom (Bins) */
+.slot {
+    width: 55px;
+    height: 55px;
+    background-color: #A372D1; /* Lighter purple */
+    border-radius: 12px; /* Rounded square shape */
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #27107c; /* Darker text for contrast */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes drop {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}

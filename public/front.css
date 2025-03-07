@@ -1,0 +1,63 @@
+/* General Styling */
+body {
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    background-color: #1a0529; /* Deep purple */
+    color: #DECAB6; /* Light gold */
+    margin: 0;
+    background-image: url('images/black-space-outer-space.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Banner */
+header {
+    background: #1a0529; /* Darker purple */
+    padding: 20px;
+    color: #F2E6FF; /* Soft white */
+    font-size: 1.8rem;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Slideshow Placeholder */
+#slideshow {
+    margin: 20px auto;
+    padding: 30px;
+    background: #471c78; /* Slightly lighter purple */
+    border-radius: 12px;
+    width: 60%;
+    color: #F2E6FF;
+    font-size: 1.2rem;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* Game Boxes */
+.game-box {
+    display: inline-block;
+    width: 170px;
+    height: 170px;
+    background: #771145; /* Rich purple-red */
+    color: #F2E6FF;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 170px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.game-box:hover {
+    background: #A372D1; /* Softer purple */
+    transform: scale(1.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+}
