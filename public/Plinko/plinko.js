@@ -11,24 +11,22 @@ const discRadius = 10;
 const pegs = [];
 const discs = [];
 const slots = [];
-let score = 0;
 let balance = 500;
 
-document.getElementById('cashOutButton').addEventListener('click', () => {
-    balance += score;
-    score = 0;
+// Remove the cash-out button from the UI
+document.getElementById('cashOutButton').style.display = 'none';
+
+function updateBalance() {
     document.getElementById('balance').innerText = `Balance: ${balance}`;
-    document.getElementById('score').innerText = `Score: ${score}`;
-});
+}
 
 function createPegGrid() {
     const rows = 10;
-    const cols = 15;
     const startX = canvas.width / 2;
     const startY = 50;
     const spacing = 50;
 
-    for (let row = 0; row < rows; row++) {
+    for (let row = 1; row < rows; row++) { // Start from row 1 to skip the top peg
         for (let col = 0; col <= row; col++) {
             let x = startX - (row * spacing / 2) + (col * spacing);
             let y = startY + (row * spacing);
@@ -36,6 +34,7 @@ function createPegGrid() {
         }
     }
 }
+
 
 function createPointSlots() {
     const slotWidth = canvas.width / 14;
@@ -45,13 +44,21 @@ function createPointSlots() {
         slots.push({ 
             x: i * slotWidth, 
             width: slotWidth, 
-            points: multipliers[i] * 1, 
-            animationProgress: 0 // Track bounce animation
+            points: multipliers[i] * 50, // Directly apply the multiplier
+            animationProgress: 0
         });
     }
 }
 
 function dropDisc(x) {
+    if (balance < 50) {
+        alert("Insufficient balance to play.");
+        return;
+    }
+    
+    balance -= 50; // Deduct cost immediately
+    updateBalance();
+    
     discs.push({ x, y: 0, vx: 0, vy: 0 });
 }
 
@@ -74,17 +81,11 @@ function resolveCollision(disc, peg) {
         disc.vx -= (1 + damping) * dotProduct * normalX;
         disc.vy -= (1 + damping) * dotProduct * normalY;
 
-        // Add randomness to avoid repeating patterns
         disc.vx += (Math.random() - 0.5) * 0.5;
     }
 }
 
 function update() {
-    if (balance <= 0) {
-        alert("Insufficient balance to play.");
-        return;
-    }
-    
     discs.forEach(disc => {
         disc.vy += gravity;
         disc.y += disc.vy;
@@ -105,22 +106,18 @@ function update() {
         if (disc.y + discRadius >= canvas.height - 50) {
             let landedSlot = slots.find(slot => disc.x > slot.x && disc.x < slot.x + slot.width);
             if (landedSlot) {
-                score += landedSlot.points * 50;
-                document.getElementById('score').innerText = `Score: ${score}`;
-                balance -= 50;
-                document.getElementById('balance').innerText = `Balance: ${balance}`;
+                balance += landedSlot.points; // Add winnings immediately
+                updateBalance();
 
-                // Start bounce animation for the bin
-                landedSlot.animationProgress = 1.0;
+                landedSlot.animationProgress = 1.0; // Start bounce animation
             }
             discs.splice(discs.indexOf(disc), 1);
         }
     });
 
-    // Animate the bin bounce effect
     slots.forEach(slot => {
         if (slot.animationProgress > 0) {
-            slot.animationProgress -= 0.05; // Smoothly shrink back to normal
+            slot.animationProgress -= 0.05;
         }
     });
 }
@@ -143,7 +140,6 @@ function drawRoundedRect(x, y, width, height, radius) {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw pegs (White)
     pegs.forEach(peg => {
         ctx.beginPath();
         ctx.arc(peg.x, peg.y, pegRadius, 0, Math.PI * 2);
@@ -151,7 +147,6 @@ function draw() {
         ctx.fill();
     });
 
-    // Draw discs
     discs.forEach(disc => {
         ctx.beginPath();
         ctx.arc(disc.x, disc.y, discRadius, 0, Math.PI * 2);
@@ -159,14 +154,12 @@ function draw() {
         ctx.fill();
     });
 
-    // Draw bins (Light purple + bounce effect)
     slots.forEach(slot => {
-        let bounceHeight = slot.animationProgress * 10; // Expand bin when a ball lands in it
+        let bounceHeight = slot.animationProgress * 10;
 
         ctx.fillStyle = '#A372D1';
         drawRoundedRect(slot.x, canvas.height - 50 - bounceHeight, slot.width, 50 + bounceHeight, 10);
 
-        // Draw text on bin
         ctx.fillStyle = 'white';
         ctx.font = '16px Arial';
         ctx.fillText(slot.points, slot.x + slot.width / 3, canvas.height - 20 - bounceHeight);
@@ -179,11 +172,12 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    dropDisc(e.clientX - rect.left);
+// Update event listener: Ball drops from the center of the screen now
+canvas.addEventListener('click', () => {
+    dropDisc(canvas.width / 2); // Drop the disc from the center of the canvas
 });
 
 createPegGrid();
 createPointSlots();
+updateBalance();
 gameLoop();
