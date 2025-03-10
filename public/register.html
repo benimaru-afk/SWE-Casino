@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form id="register-form">
+        <input type="text" id="reg-username" placeholder="Username" required>
+        <input type="password" id="reg-password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+
+	<script src="user.js"></script>
+    <script src="auth.js"></script>
+    
+	<!-- 
+    <script>
+    document.getElementById("register-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const username = document.getElementById("reg-username").value;
+        const password = document.getElementById("reg-password").value;
+
+        let users = JSON.parse(localStorage.getItem("users")) || {}; // Get all users
+        if (users[username]) {
+            alert("Username already exists!");
+            return;
+        }
+        users[username] = password; // Store password in plain text
+        localStorage.setItem("users", JSON.stringify(users)); // Save updated users list
+        alert("Registration successful!");
+        window.location.href = "login.html"; // Redirect to login page
+    });
+
+    </script>
+     -->
+</body>
+</html>

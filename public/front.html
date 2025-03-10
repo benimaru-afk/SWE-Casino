@@ -14,12 +14,17 @@
 	<header>
 		<h1>🎮 Welcome to Our Casino! 🎮</h1>
 	<p>Your go-to place for crypto gambling!</p>
+	<div id="user-status">
+		<span id="user-info">Not logged in</span>
+		<a id="login-button" href="login.html">Login</a>
+	</div>
 	</header>
 
 	<!-- Slideshow Placeholder -->
 	<section id="slideshow">
 	<p>Slideshow coming soon...</p>
 	</section>
+
 
 	<!-- Game Selection -->
 	<main>
@@ -29,6 +34,25 @@
 		<a href="Plinko/Plinko.html" class="game-box">🎲 Plinko</a>
 		</div>
 	</main>
+	
+	<script src="user.js"></script>
+	<script src="auth.js"></script>
+	<!-- temporary stuff -->
+	<script>
+        function updateUserStatus() {
+            const user = getCurrentUser();
+            if (user) {
+                document.getElementById("user-info").innerText = `Logged in as ${user.username}`;
+                document.getElementById("login-button").innerText = "Logout";
+                document.getElementById("login-button").href = "#";
+                document.getElementById("login-button").onclick = function () {
+                    logout();
+                    location.reload();
+                };
+            }
+        }
+        document.addEventListener("DOMContentLoaded", updateUserStatus);
+    </script>
 
 </body>
 </html>

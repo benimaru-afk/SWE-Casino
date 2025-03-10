@@ -13,5 +13,23 @@
 	<h1>🎰 Slot Machine 🎰</h1>
  	<button onclick="spin()">Spin!</button>
 	<div id="slotResults"></div>
+	
+	<p id="user-info">Not logged in</p>
+
+<script src="../user.js"></script>
+<script src="../auth.js"></script>
+
+<script>
+    function updateUserInfo() {
+    	const user = getCurrentUser();
+        document.getElementById("user-info").innerText = user 
+            ? `Logged in as ${user.username} (Balance: $${user.bal})`
+            : "Not logged in";
+    }
+
+    document.addEventListener("DOMContentLoaded", updateUserInfo);
+</script>
+
+	
 </body>
 </html>

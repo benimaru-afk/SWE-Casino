@@ -1,4 +1,4 @@
-let balance = 1000;  ///just for now
+///let balance = 1000;  ///just for now
 ///these values can also be changed later
 const spincost = 10;
 const jackpot = 50;
@@ -6,9 +6,56 @@ const win = 15;
 
 ///i want to add a betting amount system on the weekend and a pity system too
 
+///fetching the current user's balance from localStorage
+function getUserBalance() {
+    const user = getCurrentUser();
+    return user ? user.bal : 0; // Default to 0 if no user is found
+}
+
+function updateUserBalance(newBalance) {
+    // Get full user data from localStorage
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+    let user = getCurrentUser();  // Get the currently logged-in user by username from sessionStorage
+    
+    if (!user || !users[user.username]) return;  // Ensure user exists
+    
+    // Update balance in the users object
+    users[user.username].bal = newBalance;  // Update balance
+    
+    // Save the updated users object back to localStorage
+    localStorage.setItem("users", JSON.stringify(users)); 
+    
+    // Update user info on the page immediately after updating the balance
+    updateUserInfo();
+}
+
+
+///save the updated balance back to localStorage
+/*
+function updateUserBalance(newBalance) {
+    let user = getCurrentUser();
+    if (!user) return;
+
+    user.bal = newBalance;  // Update balance
+    localStorage.setItem("currentUser", JSON.stringify(user)); // Save back to storage
+    updateUserInfo(); // Refresh display!
+    /*
+    if (user) {
+        user.bal = newBalance;
+        let users = JSON.parse(localStorage.getItem("users"));
+        users[user.username].bal = newBalance;
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Also update the display to show new balance
+        updateUserInfo();
+    }
+    */
+///}
+
 
 ///spin function 
 function spin() {
+	let balance = getUserBalance();  // Fetch balance dynamically
 	if (balance < spincost) {
 	        updateDisplay("❌ Not enough coins to spin!");
 	        return;
@@ -37,6 +84,9 @@ function spin() {
 	} else {
 		resultText += "<br>😞 Try again!";
 	}
+	
+	// Save the updated balance back to storage
+    updateUserBalance(balance);
 
 	resultText += "<br>Current balance: " + balance + " coins";
 	updateDisplay(resultText);
@@ -54,3 +104,13 @@ function updateDisplay(message) {
     }, 200);
 }
 
+/// Update user info on page load
+function updateUserInfo() {
+    const user = getCurrentUser();
+    document.getElementById("user-info").innerText = user 
+        ? `Logged in as ${user.username} (Balance: $${user.bal})`
+        : "Not logged in";
+}
+
+/// Ensure user info updates after page load
+document.addEventListener("DOMContentLoaded", updateUserInfo);
