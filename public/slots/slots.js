@@ -4,67 +4,52 @@ const spincost = 10;
 const jackpot = 50;
 const win = 15;
 
-///i want to add a betting amount system on the weekend and a pity system too
+///i want to add a betting amount system and a pity system too over spring break
 
-///fetching the current user's balance from localStorage
+///fetching the current user's balance from localStorage (these two funcs should be integrated elsewhere)
 function getUserBalance() {
-    const user = getCurrentUser();
-    return user ? user.bal : 0; // Default to 0 if no user is found
+	const user = getCurrentUser();
+	return user ? user.bal : 0; // Default to 0 if no user is found
 }
 
 function updateUserBalance(newBalance) {
-    // Get full user data from localStorage
-    let users = JSON.parse(localStorage.getItem("users")) || {};
-    let user = getCurrentUser();  // Get the currently logged-in user by username from sessionStorage
-    
-    if (!user || !users[user.username]) return;  // Ensure user exists
-    
-    // Update balance in the users object
-    users[user.username].bal = newBalance;  // Update balance
-    
-    // Save the updated users object back to localStorage
-    localStorage.setItem("users", JSON.stringify(users)); 
-    
-    // Update user info on the page immediately after updating the balance
-    updateUserInfo();
+	///retrieve data from local storage
+	let users = JSON.parse(localStorage.getItem("users")) || {};
+	let user = getCurrentUser(); 
+
+	if (!user) {
+		console.log("No user is logged in!");
+		return;
+	}
+
+	if (!users[user.username]) {
+		console.log("User data not found in localStorage!");
+        return;
+	}
+
+	users[user.username].bal = newBalance;
+
+	localStorage.setItem("users", JSON.stringify(users));
+
+	///update sessionStorage with the new balance
+	sessionStorage.setItem("currentUser", JSON.stringify({ username: user.username, bal: newBalance }));
+
+	updateUserInfo();
 }
-
-
-///save the updated balance back to localStorage
-/*
-function updateUserBalance(newBalance) {
-    let user = getCurrentUser();
-    if (!user) return;
-
-    user.bal = newBalance;  // Update balance
-    localStorage.setItem("currentUser", JSON.stringify(user)); // Save back to storage
-    updateUserInfo(); // Refresh display!
-    /*
-    if (user) {
-        user.bal = newBalance;
-        let users = JSON.parse(localStorage.getItem("users"));
-        users[user.username].bal = newBalance;
-        localStorage.setItem("users", JSON.stringify(users));
-
-        // Also update the display to show new balance
-        updateUserInfo();
-    }
-    */
-///}
 
 
 ///spin function 
 function spin() {
-	let balance = getUserBalance();  // Fetch balance dynamically
+	let balance = getUserBalance();  
 	if (balance < spincost) {
-	        updateDisplay("❌ Not enough coins to spin!");
+			updateDisplay("❌ Not enough coins to spin!");
 	        return;
 	}
 
 	///updating after spin
 	balance -= spincost; 
 
-///the second icon here is a lemon just ignore the fact that it doesn't show up within the file depending on font (it's there)
+	///the second icon here is a lemon just ignore the fact that it doesn't show up within the file depending on font (it's there)
 	const symbols = ["🍒", "🍋", "🔔", "⭐", "💎"];
 	let result = [
 		symbols[Math.floor(Math.random() * symbols.length)],
@@ -85,8 +70,8 @@ function spin() {
 		resultText += "<br>😞 Try again!";
 	}
 	
-	// Save the updated balance back to storage
-    updateUserBalance(balance);
+	///Save the updated balance back to storage
+	updateUserBalance(balance);
 
 	resultText += "<br>Current balance: " + balance + " coins";
 	updateDisplay(resultText);
@@ -94,23 +79,27 @@ function spin() {
 
 ///display results
 function updateDisplay(message) {
-    const slotResults = document.getElementById("slotResults");
-    slotResults.innerHTML = message;
+	const slotResults = document.getElementById("slotResults");
+	slotResults.innerHTML = message;
 
-    // Add a quick animation effect
-    slotResults.style.transform = "scale(1.1)";
-    setTimeout(() => {
-        slotResults.style.transform = "scale(1)";
-    }, 200);
+	///Add a quick animation effect
+	slotResults.style.transform = "scale(1.1)";
+	setTimeout(() => {
+		slotResults.style.transform = "scale(1)";
+	}, 200);
 }
 
-/// Update user info on page load
+///update user info on page load (also should be integrated elsewhere)
 function updateUserInfo() {
-    const user = getCurrentUser();
-    document.getElementById("user-info").innerText = user 
-        ? `Logged in as ${user.username} (Balance: $${user.bal})`
-        : "Not logged in";
+	const user = getCurrentUser();
+	if (user) {
+		console.log("User:", user);
+		console.log("User balance:", user.bal);	
+	}
+	document.getElementById("user-info").innerText = user 
+		? `Logged in as ${user.username} (Balance: $${user.bal})`
+		: "Not logged in";
 }
 
-/// Ensure user info updates after page load
+///ensure user info updates after page load
 document.addEventListener("DOMContentLoaded", updateUserInfo);

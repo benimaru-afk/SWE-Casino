@@ -19,17 +19,5 @@
 <script src="../user.js"></script>
 <script src="../auth.js"></script>
 
-<script>
-    function updateUserInfo() {
-    	const user = getCurrentUser();
-        document.getElementById("user-info").innerText = user 
-            ? `Logged in as ${user.username} (Balance: $${user.bal})`
-            : "Not logged in";
-    }
-
-    document.addEventListener("DOMContentLoaded", updateUserInfo);
-</script>
-
-	
 </body>
 </html>
