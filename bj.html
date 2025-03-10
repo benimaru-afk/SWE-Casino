@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+</head>
+<body>
+
+    <h1>Blackjack</h1>
+
+    <p> Balance: <span id="balance">1000</span> coins</p>
+
+    <div id="betOptions">
+        <p>Place your bet:</p>
+        <button onclick="placeBet(5)">5 Coins</button>
+        <button onclick="placeBet(15)">15 Coins</button>    <!--bet amounts (will need to be changed based on wallet) -->
+        <button onclick="placeBet(30)">30 Coins</button>
+    </div>
+
+    <div id="gameResults">
+        <p>Player Hand: (Score: 0)</p>
+        <p>Dealer Hand: (Score: 0)</p>
+        <h2> Choose a bet to start a new round.</h2>
+    </div>
+
+    <div id="gameButtons">
+        <button onclick="hit()">Hit</button>
+        <button onclick="stand()">Stand</button>
+    </div>
+
+    <button id="newGameButton" onclick="restartGame()">New Game</button>
+
+    <script src="bj.js"></script>
+
+</body>
+</html>
