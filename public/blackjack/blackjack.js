@@ -133,22 +133,38 @@ function restartGame() {
 
 // display functions
 function updateDisplay(message = "") {
-    let playerText = "Player Hand: (Score: 0)";
-    let dealerText = "Dealer Hand: (Score: 0)";
+    const playerScore = calculateScore(playerHand);
+    const dealerScore = calculateScore(dealerHand);
 
-    if (playerHand.length > 0) {
-        playerText = `Player Hand: ${formatHand(playerHand)} (Score: ${calculateScore(playerHand)})`;
-    }
-    if (dealerHand.length > 0) {
-        dealerText = `Dealer Hand: ${formatHand(dealerHand)} (Score: ${calculateScore(dealerHand)})`;
-    }
+    document.getElementById("playerScore").innerText = playerScore;
+    document.getElementById("dealerScore").innerText = dealerScore;
+    document.getElementById("gameMessage").innerText = message;
 
-    document.getElementById("gameResults").innerHTML = `
-        <p>${playerText}</p>
-        <p>${dealerText}</p>
-        <h2>${message}</h2>
-    `;
+    renderHand("playerCards", playerHand);
+    renderHand("dealerCards", dealerHand);
 }
+
+function renderHand(containerId, hand) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    hand.forEach(card => {
+        const cardDiv = document.createElement("div");
+        cardDiv.classList.add("card");
+
+        const isRed = card.suit === "♡" || card.suit === "♢";
+        cardDiv.classList.add(isRed ? "red" : "black");
+
+        cardDiv.innerHTML = `
+            <div class="top-left">${card.value}<br>${card.suit}</div>
+            <div class="suit">${card.suit}</div>
+            <div class="bottom-right">${card.value}<br>${card.suit}</div>
+        `;
+
+        container.appendChild(cardDiv);
+    });
+}
+
 
 
 function updateBalance() {

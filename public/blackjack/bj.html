@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
+    <link rel="stylesheet" href="blackjack.css">
 </head>
 <body>
 
@@ -19,10 +20,18 @@
     </div>
 
     <div id="gameResults">
-        <p>Player Hand: (Score: 0)</p>
-        <p>Dealer Hand: (Score: 0)</p>
-        <h2> Choose a bet to start a new round.</h2>
+        <div>
+            <h2>Player Hand (<span id="playerScore">0</span>):</h2>
+            <div id="playerCards" class="hand"></div>
+        </div>
+        <div>
+            <h2>Dealer Hand (<span id="dealerScore">0</span>):</h2>
+            <div id="dealerCards" class="hand"></div>
+        </div>
+        <h2 id="gameMessage">Choose a bet to start a new round.</h2>
     </div>
+    
+    
 
     <div id="gameButtons">
         <button onclick="hit()">Hit</button>

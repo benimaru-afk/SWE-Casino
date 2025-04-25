@@ -1,0 +1,125 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a0529;
+    color: #DECAB6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 15px;
+    text-align: center;
+}
+
+/* Header and Text Styling */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+p, h2 {
+    font-size: 1.25rem;
+    margin: 10px 0;
+}
+
+/* Buttons */
+button {
+    background-color: #6F0081;
+    color: #F2E6FF;
+    border: none;
+    padding: 12px 24px;
+    margin: 8px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #57006A;
+    transform: scale(1.05);
+}
+
+/* Game sections */
+#betOptions, #gameButtons, #newGameButton {
+    margin: 20px 0;
+}
+
+#gameResults {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #260b41;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    border: 2px solid #A372D1;
+    min-width: 300px;
+}
+
+/* Card Container */
+.hand {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+/* Individual Card Styling */
+.card {
+    width: 60px;
+    height: 90px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    position: relative;
+}
+
+/* Red suits */
+.card.red {
+    color: #D80027;
+}
+
+/* Black suits */
+.card.black {
+    color: #000;
+}
+
+/* Top-left & bottom-right values */
+.card .top-left,
+.card .bottom-right {
+    position: absolute;
+}
+
+.card .top-left {
+    top: 6px;
+    left: 6px;
+}
+
+.card .bottom-right {
+    bottom: 6px;
+    right: 6px;
+    transform: rotate(180deg);
+}
+
+/* Center suit display */
+.card .suit {
+    font-size: 24px;
+    margin: auto;
+}
