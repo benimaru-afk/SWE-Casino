@@ -148,20 +148,25 @@ function renderHand(containerId, hand) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
 
-    hand.forEach(card => {
+    hand.forEach((card, index) => {
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
 
-        const isRed = card.suit === "♡" || card.suit === "♢";
-        cardDiv.classList.add(isRed ? "red" : "black");
+        if (containerId === "dealerCards" && index === 0 && !gameOver) {
+            // Hide the dealer's first card if game not over
+            cardDiv.classList.add("back");
+            container.appendChild(cardDiv);
+        } else {
+            const isRed = card.suit === "♡" || card.suit === "♢";
+            cardDiv.classList.add(isRed ? "red" : "black");
 
-        cardDiv.innerHTML = `
-            <div class="top-left">${card.value}<br>${card.suit}</div>
-            <div class="suit">${card.suit}</div>
-            <div class="bottom-right">${card.value}<br>${card.suit}</div>
-        `;
-
-        container.appendChild(cardDiv);
+            cardDiv.innerHTML = `
+                <div class="top-left">${card.value}<br>${card.suit}</div>
+                <div class="suit">${card.suit}</div>
+                <div class="bottom-right">${card.value}<br>${card.suit}</div>
+            `;
+            container.appendChild(cardDiv);
+        }
     });
 }
 

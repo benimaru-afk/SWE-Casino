@@ -11,7 +11,20 @@
 
 <body>
 	<h1>🎰 Slot Machine 🎰</h1>
+
  	<button onclick="spin()">Spin!</button>
+
+	<!-- Emoji Slot Display (NEW) -->
+	<div id="slotDisplay">
+		<span id="slot1">❓</span>
+		<span id="slot2">❓</span>
+		<span id="slot3">❓</span>
+	</div>
+
+	<!-- Results Display -->
 	<div id="slotResults"></div>
+
+	<!-- Audio -->
+	<audio id="spinSound" src="SPIN.mp3" preload="auto"></audio>
 </body>
 </html>
