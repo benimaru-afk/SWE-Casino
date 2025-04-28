@@ -20,18 +20,6 @@ header {
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Slideshow Placeholder */
-#slideshow {
-    margin: 20px auto;
-    padding: 30px;
-    background: #471c78; /* Slightly lighter purple */
-    border-radius: 12px;
-    width: 60%;
-    color: #F2E6FF;
-    font-size: 1.2rem;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-}
-
 /* Game Container */
 .game-container {
     display: flex;
@@ -60,4 +48,71 @@ header {
     background: #A372D1; /* Softer purple */
     transform: scale(1.1);
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+#slideshow {
+	position: relative;
+	width: 100%;
+	height: 60px; /* Adjust as needed */
+	overflow: hidden;
+	background-color: #000; /* or match your site's theme */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-crawl {
+	position: absolute;
+	white-space: nowrap;
+	color: #ff14ef;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 1.5rem;
+	text-shadow: 0 0 5px #ff52ac, 0 0 10px #f558fe;
+}
+
+.text-crawl::after {
+	content: attr(data-text);
+	position: absolute;
+	animation: crawl 10s linear infinite;
+}
+
+@keyframes crawl {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(-185%);
+	}
+}
+
+/* Optional: Pause animation when hovered */
+.text-crawl:hover::after {
+	animation-play-state: paused;
+}
+
+/* Music Control Button Styling */
+#music-control {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #83339f;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#music-control:hover {
+    background-color: #ff52ff;
+    transform: scale(1.1);
+}
+
+#music-control:active {
+    background-color: #ff72e0;
+    transform: scale(1.05);
 }
