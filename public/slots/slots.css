@@ -53,3 +53,13 @@ button:hover {
     border: 2px solid #A372D1;
     min-width: 300px;
 }
+
+#slotDisplay span {
+    font-size: 2.5rem;
+    padding: 0 10px;
+    transition: transform 0.2s ease;
+}
+
+#slotDisplay span.reveal {
+    transform: scale(1.4);
+}

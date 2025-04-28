@@ -123,3 +123,23 @@ button:hover {
     font-size: 24px;
     margin: auto;
 }
+
+/* Card back styling */
+.card.back {
+    background: linear-gradient(135deg, #6F0081, #260b41); /* purpley gradient like a Bicycle card */
+    border: 2px solid #A372D1;
+    position: relative;
+}
+
+.card.back::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background-image: radial-gradient(#DECAB6 10%, transparent 10%), radial-gradient(#DECAB6 10%, transparent 10%);
+    background-position: 0 0, 20px 20px;
+    background-size: 40px 40px;
+    opacity: 0.5;
+}
