@@ -80,6 +80,11 @@ function hit() {
 
     playerHand.push(drawCard());
 
+    // Play the draw card sound
+    const drawSound = document.getElementById("drawSound");
+    drawSound.currentTime = 0; // rewind to start
+    drawSound.play();
+
     if (calculateScore(playerHand) > 21) {
         gameOver = true;
         updateDisplay(" Player busts! Dealer wins.");
@@ -88,6 +93,7 @@ function hit() {
         updateDisplay();
     }
 }
+
 
 function stand() {
     if (gameOver) return;
@@ -134,7 +140,7 @@ function restartGame() {
 // display functions
 function updateDisplay(message = "") {
     const playerScore = calculateScore(playerHand);
-    const dealerScore = calculateScore(dealerHand);
+    const dealerScore = "???";
 
     document.getElementById("playerScore").innerText = playerScore;
     document.getElementById("dealerScore").innerText = dealerScore;

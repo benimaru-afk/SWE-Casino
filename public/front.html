@@ -13,12 +13,40 @@
 	<!-- Banner -->
 	<header>
 		<h1>🎮 Welcome to Our Casino! 🎮</h1>
-	<p>Your go-to place for crypto gambling!</p>
+		<p>Your go-to place for crypto gambling!</p>
 	</header>
 
-	<!-- Slideshow Placeholder -->
+	<!-- Background Lobby Music -->
+	<audio id="lobby-music" src="lobby.mp3" loop></audio>
+
+	<!-- Music Control Button -->
+	<button id="music-control">🔊 Pause Music</button>
+
+	<script>
+		const musicControl = document.getElementById('music-control');
+		const lobbyMusic = document.getElementById('lobby-music');
+
+		// Set initial volume
+		lobbyMusic.volume = 0.15; // 15% volume
+
+		// Ensure music starts paused
+		lobbyMusic.pause();
+		musicControl.textContent = '🔈 Play Lobby Music';
+
+		musicControl.addEventListener('click', () => {
+			if (lobbyMusic.paused) {
+				lobbyMusic.play();
+				musicControl.textContent = '🔊 Pause Lobby Music';
+			} else {
+				lobbyMusic.pause();
+				musicControl.textContent = '🔈 Play Lobby Music';
+			}
+		});
+	</script>
+
+	<!-- Text Crawl Section -->
 	<section id="slideshow">
-	<p>Slideshow coming soon...</p>
+		<div class="text-crawl" data-text="🎮 Built by: Andrew 🎲 Ben 🎰 Clovis 🎯 Madison 🃏 Tristen 🎮"></div>
 	</section>
 
 	<!-- Game Selection -->
@@ -26,7 +54,7 @@
 		<div class="game-container">
 			<a href="slots/slots.html" class="game-box">🎰 Slots</a>
 			<a href="blackjack/bj.html" class="game-box">🃏 Blackjack</a>
-		<a href="Plinko/Plinko.html" class="game-box">🎲 Plinko</a>
+			<a href="Plinko/Plinko.html" class="game-box">🎲 Plinko</a>
 		</div>
 	</main>
 
