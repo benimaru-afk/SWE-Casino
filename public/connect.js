@@ -14,5 +14,12 @@ async function connectWallet() {
     }
 }
 
-// Attach the function to the button
+// Attach the function to the wallet connect button
 document.getElementById('connectButton').addEventListener('click', connectWallet);
+
+// Handle guest login
+document.getElementById('guestButton').addEventListener('click', () => {
+    // Optional: Set a guest flag if you need to check it later
+    localStorage.setItem('guestUser', 'true');
+    window.location.href = 'public/front/front.html';
+});

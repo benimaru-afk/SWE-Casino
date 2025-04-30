@@ -6,14 +6,14 @@
 	<meta name="description" content="Front Page">
 	<title>Casino</title>
 	<link rel="stylesheet" href="front.css">
-	<link rel="icon" href="images/logo.png" type="image/png">
+	<link rel="icon" href="../images/logo.png" type="image/png">
 </head>
 <body>
 
 	<!-- Banner -->
 	<header>
-		<h1>🎮 Welcome to Our Casino! 🎮</h1>
-		<p>Your go-to place for crypto gambling!</p>
+		<h1>🎮 Welcome to the Prison Realm! 🎮</h1>
+		<p>Your Permanent Residence for Crypto Gambling!</p>
 	</header>
 
 	<!-- Background Lobby Music -->
@@ -22,9 +22,14 @@
 	<!-- Music Control Button -->
 	<button id="music-control">🔊 Pause Music</button>
 
+	<!-- Balance Display -->
+	<div id="balance" class="button-style">Balance: 0 Coins</div>
+
+	<script src="../wallet.js"></script>
 	<script>
 		const musicControl = document.getElementById('music-control');
 		const lobbyMusic = document.getElementById('lobby-music');
+		const balanceDisplay = document.getElementById('balance');
 
 		// Set initial volume
 		lobbyMusic.volume = 0.15; // 15% volume
@@ -42,6 +47,15 @@
 				musicControl.textContent = '🔈 Play Lobby Music';
 			}
 		});
+
+		// Fetch and display the balance
+		function updateBalanceDisplay() {
+			const balance = Wallet.getBalance(); // Assuming Wallet.getBalance() exists
+			balanceDisplay.textContent = `Balance: ${balance} Coins`;
+		}
+
+		// Update the balance display on page load
+		updateBalanceDisplay();
 	</script>
 
 	<!-- Text Crawl Section -->
@@ -52,9 +66,9 @@
 	<!-- Game Selection -->
 	<main>
 		<div class="game-container">
-			<a href="slots/slots.html" class="game-box">🎰 Slots</a>
-			<a href="blackjack/bj.html" class="game-box">🃏 Blackjack</a>
-			<a href="Plinko/Plinko.html" class="game-box">🎲 Plinko</a>
+			<a href="../slots/slots.html" class="game-box">🎰 Slots</a>
+			<a href="../blackjack/bj.html" class="game-box">🃏 Blackjack</a>
+			<a href="../Plinko/Plinko.html" class="game-box">🎲 Plinko</a>
 		</div>
 	</main>
 

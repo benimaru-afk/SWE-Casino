@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
     <link rel="stylesheet" href="blackjack.css">
+    <link rel="icon" href="../images/logo.png" type="image/png">
     <audio id="drawSound" src="draw.mp3" preload="auto"></audio>
+    <script src="../wallet.js"></script>
+	<script> Wallet.init(); // Always initialize the wallet first</script>
 </head>
 <body>
 
+    <button id="backButton" style="position: absolute; top: 10px; left: 10px; background: none; border: none; padding: 0;" onclick="window.location.href='../front/front.html'">
+        <img src="../images/home.png" alt="Home" style="width: 40px; height: 40px;">
+    </button>
+
     <h1>Blackjack</h1>
 
-    <p> Balance: <span id="balance">1000</span> coins</p>
+    <p> Balance: <span id="balance"></span> coins</p>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const balanceElement = document.getElementById("balance");
+            balanceElement.textContent = Wallet.getBalance();
+        });
+    </script>
 
     <div id="betOptions">
         <p>Place your bet:</p>

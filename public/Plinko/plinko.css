@@ -120,3 +120,25 @@ button:hover {
     0% { transform: translateY(-50px); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
 }
+
+#plinkResults {
+    font-size: 1.0rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #771145;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #A372D1;
+    min-width: 300px;
+}
+
+#plinkDisplay span {
+    font-size: 1.5rem;
+    padding: 0 10px;
+    transition: transform 0.2s ease;
+}
+
+#plinkDisplay span.reveal {
+    transform: scale(1.4);
+}
