@@ -5,7 +5,7 @@ body {
     background-color: #1a0529; /* Deep purple */
     color: #DECAB6; /* Light gold */
     margin: 0;
-    background-image: url('images/black-space-outer-space.gif');
+    background-image: url('../images/black-space-outer-space.gif');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -113,6 +113,33 @@ header {
 }
 
 #music-control:active {
+    background-color: #ff72e0;
+    transform: scale(1.05);
+}
+
+/* Balance Button Styling */
+#balance {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #83339f;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#balance:hover {
+    background-color: #ff52ff;
+    transform: scale(1.1);
+}
+
+#balance:active {
     background-color: #ff72e0;
     transform: scale(1.05);
 }

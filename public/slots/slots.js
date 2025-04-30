@@ -1,4 +1,3 @@
-let balance = 1000;  ///just for now
 ///these values can also be changed later
 const spincost = 10;
 const jackpot = 50;
@@ -15,12 +14,12 @@ function spin() {
     audio.currentTime = 0; // Rewind to start if it’s still playing
     audio.play();
 
-    if (balance < spincost) {
+    if ( Wallet.getBalance() < spincost) {
         updateDisplay("❌ Not enough coins to spin!");
         return;
     }
 
-    balance -= spincost;
+    Wallet.updateBalance(-spincost);
 
     const symbols = ["🍒", "🍋", "🔔", "⭐", "💎"];
     let result = [
@@ -63,15 +62,15 @@ function spin() {
 
             if (result[0] === result[1] && result[1] === result[2]) {
                 resultText += "<br>🎉 JACKPOT! You won " + jackpot + " coins! 🎉";
-                balance += jackpot;
+                Wallet.updateBalance(jackpot);
             } else if (result[0] === result[1] || result[1] === result[2] || result[0] === result[2]) {
                 resultText += "<br>😊 Small win! You won " + win + " coins! 🎉";
-                balance += win;
+                Wallet.updateBalance(win);
             } else {
                 resultText += "<br>😞 Try again!";
             }
 
-            resultText += "<br>Current balance: " + balance + " coins";
+            resultText += "<br>Current balance: " + Wallet.getBalance() + " coins";
             updateDisplay(resultText);
         }, 3720); // final reveal + result message
     }, 250); // Delay animation by 0.25 seconds

@@ -11,13 +11,15 @@ const discRadius = 10;
 const pegs = [];
 const discs = [];
 const slots = [];
-let balance = 500;
 
 // Remove the cash-out button from the UI
 document.getElementById('cashOutButton').style.display = 'none';
 
 function updateBalance() {
-    document.getElementById('balance').innerText = `Balance: ${balance}`;
+    const balanceElement = document.getElementById('balance');
+    if (balanceElement) {
+        balanceElement.innerText = `${Wallet.getBalance()}`;
+    }
 }
 
 function createPegGrid() {
@@ -38,7 +40,7 @@ function createPegGrid() {
 
 function createPointSlots() {
     const slotWidth = canvas.width / 14;
-    const multipliers = [0, 0, 0, 0.25, 20, 1, 0.5, 0.5, 1, 20, 0.25, 0, 0, 0, 0];
+    const multipliers = [0, 0, 0, 0.25, 2, 1, 0.5, 0.5, 1, 2, 0.25, 0, 0, 0, 0];
 
     for (let i = 0; i < 14; i++) {
         slots.push({ 
@@ -51,12 +53,12 @@ function createPointSlots() {
 }
 
 function dropDisc(x) {
-    if (balance < 50) {
+    if (Wallet.getBalance() < 50) {
         alert("Insufficient balance to play.");
         return;
     }
     
-    balance -= 50; // Deduct cost immediately
+    Wallet.updateBalance(-50); // Deduct cost using wallet's updateBalance method
     updateBalance();
     
     discs.push({ x, y: 0, vx: 0, vy: 0 });
@@ -68,6 +70,10 @@ function resolveCollision(disc, peg) {
     let distance = Math.sqrt(dx * dx + dy * dy);
 
     if (distance < pegRadius + discRadius) {
+        // Play the bounce sound
+        const bounceSound = new Audio('bounce.mp3');
+        bounceSound.play();
+
         let angle = Math.atan2(dy, dx);
         let overlap = pegRadius + discRadius - distance;
 
@@ -107,6 +113,7 @@ function update() {
             let landedSlot = slots.find(slot => disc.x > slot.x && disc.x < slot.x + slot.width);
             if (landedSlot) {
                 balance += landedSlot.points; // Add winnings immediately
+                Wallet.updateBalance(landedSlot.points);
                 updateBalance();
 
                 landedSlot.animationProgress = 1.0; // Start bounce animation

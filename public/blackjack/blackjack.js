@@ -2,7 +2,6 @@ let deck = [];
 let playerHand = [];
 let dealerHand = [];
 let gameOver = false;
-let balance = 1000; // starting balance (will be changed and linked to wallet)
 let betAmount = 0;  // bet
 
 // deck functions
@@ -50,14 +49,13 @@ function calculateScore(hand) {
 
 // game functions
 function placeBet(amount) {
-    if (amount > balance) {
+    if (amount > Wallet.getBalance()) {
         updateDisplay(" Insufficient funds!");
         return;
     }
 
     betAmount = amount;
-    balance -= betAmount; 
-    updateBalance();
+    Wallet.updateBalance(-betAmount);
 
     startGame();
 }
@@ -111,10 +109,10 @@ function stand() {
     let result = "";
 
     if (dealerScore > 21 || playerScore > dealerScore) {
-        balance += betAmount * 2; // doubles bet on win (will need to be changed based on wallet)
+        Wallet.updateBalance(betAmount * 2); // doubles bet on win (will need to be changed based on wallet)
         result = " Player wins!";
     } else if (playerScore === dealerScore) {
-        balance += betAmount; // return bet on tie
+        Wallet.updateBalance(betAmount); // return bet on tie
         result = " It's a tie!";
     } else {
         result = " Dealer wins!";
@@ -179,7 +177,7 @@ function renderHand(containerId, hand) {
 
 
 function updateBalance() {
-    document.getElementById("balance").innerText = balance;
+    document.getElementById("balance").innerText = Wallet.getBalance();
 }
 
 function formatHand(hand) {
