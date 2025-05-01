@@ -138,7 +138,7 @@ function restartGame() {
 // display functions
 function updateDisplay(message = "") {
     const playerScore = calculateScore(playerHand);
-    const dealerScore = "???";
+    const dealerScore = gameOver ? calculateScore(dealerHand) : "???"; // Show actual score if game is over
 
     document.getElementById("playerScore").innerText = playerScore;
     document.getElementById("dealerScore").innerText = dealerScore;
