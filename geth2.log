@@ -1,0 +1,72 @@
+INFO [05-01|13:35:32.926] Maximum peer count                       ETH=50 total=50
+INFO [05-01|13:35:32.932] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
+WARN [05-01|13:35:32.932] Option "allow-insecure-unlock" is deprecated and has no effect
+INFO [05-01|13:35:32.940] Set global gas cap                       cap=50,000,000
+INFO [05-01|13:35:32.941] Initializing the KZG library             backend=gokzg
+INFO [05-01|13:35:32.997] Allocated trie memory caches             clean=154.00MiB dirty=256.00MiB
+INFO [05-01|13:35:32.997] Using pebble as the backing database
+INFO [05-01|13:35:32.997] Allocated cache and file handles         database=/home/blockchain/gethdata2/geth/chaindata cache=512.00MiB handles=524,288
+INFO [05-01|13:35:33.011] Opened ancient database                  database=/home/blockchain/gethdata2/geth/chaindata/ancient/chain readonly=false
+INFO [05-01|13:35:33.011] State scheme set to already existing     scheme=path
+INFO [05-01|13:35:33.013] Initialising Ethereum protocol           network=9412 dbversion=9
+INFO [05-01|13:35:33.013] Failed to load journal, discard it       err="journal not found"
+INFO [05-01|13:35:33.019] Opened ancient database                  database=/home/blockchain/gethdata2/geth/chaindata/ancient/state readonly=false
+INFO [05-01|13:35:33.019] Initialized path database                cache=154.00MiB buffer=256.00MiB history=90000
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INFO [05-01|13:35:33.019] Chain ID:  1 (mainnet)
+INFO [05-01|13:35:33.019] Consensus: Beacon (proof-of-stake), merged from Ethash (proof-of-work)
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] Pre-Merge hard forks (block based):
+INFO [05-01|13:35:33.019]  - Homestead:                   #1150000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/homestead.md)
+INFO [05-01|13:35:33.019]  - DAO Fork:                    #1920000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/dao-fork.md)
+INFO [05-01|13:35:33.019]  - Tangerine Whistle (EIP 150): #2463000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/tangerine-whistle.md)
+INFO [05-01|13:35:33.019]  - Spurious Dragon/1 (EIP 155): #2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md)
+INFO [05-01|13:35:33.019]  - Spurious Dragon/2 (EIP 158): #2675000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/spurious-dragon.md)
+INFO [05-01|13:35:33.019]  - Byzantium:                   #4370000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/byzantium.md)
+INFO [05-01|13:35:33.019]  - Constantinople:              #7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/constantinople.md)
+INFO [05-01|13:35:33.019]  - Petersburg:                  #7280000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/petersburg.md)
+INFO [05-01|13:35:33.019]  - Istanbul:                    #9069000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/istanbul.md)
+INFO [05-01|13:35:33.019]  - Muir Glacier:                #9200000  (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/muir-glacier.md)
+INFO [05-01|13:35:33.019]  - Berlin:                      #12244000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md)
+INFO [05-01|13:35:33.019]  - London:                      #12965000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/london.md)
+INFO [05-01|13:35:33.019]  - Arrow Glacier:               #13773000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/arrow-glacier.md)
+INFO [05-01|13:35:33.019]  - Gray Glacier:                #15050000 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/gray-glacier.md)
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] Merge configured:
+INFO [05-01|13:35:33.019]  - Hard-fork specification:    https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md
+INFO [05-01|13:35:33.019]  - Network known to be merged
+INFO [05-01|13:35:33.019]  - Total terminal difficulty:  58750000000000000000000
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] Post-Merge hard forks (timestamp based):
+INFO [05-01|13:35:33.019]  - Shanghai:                    @1681338455 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/shanghai.md)
+INFO [05-01|13:35:33.019]  - Cancun:                      @1710338135 (https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/cancun.md)
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] ---------------------------------------------------------------------------------------------------------------------------------------------------------
+INFO [05-01|13:35:33.019] 
+INFO [05-01|13:35:33.019] Loaded most recent local block           number=0 hash=d4e567..cb8fa3 age=56y1mo2w
+WARN [05-01|13:35:33.020] Loaded snapshot journal                  diffs=missing
+INFO [05-01|13:35:33.020] Initialized transaction indexer          range="last 2350000 blocks"
+INFO [05-01|13:35:33.054] Enabled snap sync                        head=0 hash=d4e567..cb8fa3
+INFO [05-01|13:35:33.054] Gasprice oracle is ignoring threshold set threshold=2
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:49:27-0600 age=2d19h46m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:50:15-0600 age=2d19h45m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:50:56-0600 age=2d19h44m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:53:39-0600 age=2d19h41m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:56:05-0600 age=2d19h39m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T17:58:46-0600 age=2d19h36m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T18:11:34-0600 age=2d19h23m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T19:25:48-0600 age=2d18h9m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T19:38:50-0600 age=2d17h56m
+WARN [05-01|13:35:33.054] Unclean shutdown detected                booted=2025-04-28T19:40:11-0600 age=2d17h55m
+WARN [05-01|13:35:33.056] Engine API enabled                       protocol=eth
+INFO [05-01|13:35:33.056] Starting peer-to-peer node               instance=Geth/v1.15.7-stable/linux-amd64/go1.23.0
+INFO [05-01|13:35:33.069] New local node record                    seq=1,745,890,730,447 id=873531b6b5bb9ff7 ip=127.0.0.1 udp=30305 tcp=30306
+INFO [05-01|13:35:33.073] Started P2P networking                   self="enode://e1e98c0a7c7ecc8e301b459bc29b413413641241c7bd088efcd5e3c39b53c8bc9a9ac49bbd4fd82f03162ca48d24a414d2a210e87c208aaf3796fd58728153e0@127.0.0.1:30306?discport=30305"
+INFO [05-01|13:35:33.075] IPC endpoint opened                      url=/home/blockchain/gethdata2/geth.ipc
+ERROR[05-01|13:35:33.075] Unavailable modules in HTTP API list     unavailable=[clique] available="[admin debug web3 eth txpool miner net]"
+INFO [05-01|13:35:33.075] Loaded JWT secret file                   path=/home/blockchain/gethdata2/geth/jwtsecret crc32=0x129052b6
+INFO [05-01|13:35:33.076] HTTP server started                      endpoint=[::]:8547 auth=false prefix= cors= vhosts=localhost
+INFO [05-01|13:35:33.077] HTTP server stopped                      endpoint=[::]:8547
+INFO [05-01|13:35:33.077] IPC endpoint closed                      url=/home/blockchain/gethdata2/geth.ipc
+Fatal: Error starting protocol stack: listen tcp 127.0.0.1:8551: bind: address already in use

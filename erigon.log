@@ -1,0 +1,50 @@
+[INFO] [05-01|13:34:04.946] logging to file system                   log dir=erigondata/logs file prefix=erigon log level=info json=false
+[INFO] [05-01|13:34:04.947] Enabling metrics export to prometheus    path=http://127.0.0.1:6061/debug/metrics/prometheus
+[INFO] [05-01|13:34:04.947] Build info                               git_branch=HEAD git_tag=v3.0.0 git_commit=57625b40faa6f2c821e3d577f0fb70bca1b705bf
+[INFO] [05-01|13:34:04.947] 
+	########b          oo                               d####b. 
+	##                                                      '## 
+	##aaaa    ##d###b. dP .d####b. .d####b. ##d###b.     aaad#' 
+	##        ##'  '## ## ##'  '## ##'  '## ##'  '##        '## 
+	##        ##       ## ##.  .## ##.  .## ##    ##        .## 
+	########P dP       dP '####P## '#####P' dP    dP    d#####P 
+	                           .##                              
+	                       d####P                               
+		 
+[INFO] [05-01|13:34:05.009] Maximum peer count                       total=32
+[INFO] [05-01|13:34:05.009] starting HTTP APIs                       port=8545 APIs=eth,web3,net,clique
+[INFO] [05-01|13:34:05.016] Set global gas cap                       cap=50000000
+[INFO] [05-01|13:34:05.017] torrent verbosity                        level=WRN
+[WARN] [05-01|13:34:05.017] No snapshot hashes for chain             chain=
+[INFO] [05-01|13:34:07.018] [Downloader] Running with                ipv6-enabled=true ipv4-enabled=true download.rate=128mb upload.rate=4mb
+[INFO] [05-01|13:34:07.019] Opening Database                         label=chaindata path=/home/blockchain/erigondata/chaindata
+[INFO] [05-01|13:34:07.027] [db] open                                label=chaindata sizeLimit=200GB pageSize=4KB
+[INFO] [05-01|13:34:07.028] Initialised chain configuration          config="{ChainID: 9412, Terminal Total Difficulty: 0, Shapella: <nil>, Dencun: <nil>, Pectra: <nil>, Fusaka: <nil>, Engine: clique}" genesis=0x999ad5c5c32a51b27e6e23d5c2f664c266d3f306079516ad3190bcca92bbd4fd
+[INFO] [05-01|13:34:07.029] Initialising Ethereum protocol           network=9412
+[INFO] [05-01|13:34:07.029] Opening Database                         label=clique path=/home/blockchain/erigondata/clique/db/clique
+[INFO] [05-01|13:34:07.047] rpc filters: subscribing to Erigon events 
+[INFO] [05-01|13:34:07.047] new subscription to logs established 
+[INFO] [05-01|13:34:07.047] Starting private RPC server              on=127.0.0.1:9090
+[INFO] [05-01|13:34:07.047] new subscription to newHeaders established 
+[INFO] [05-01|13:34:07.047] New txns subscriber joined 
+[INFO] [05-01|13:34:07.049] Reading JWT secret                       path=./jwt.hex
+[INFO] [05-01|13:34:07.049] HTTP endpoint opened for Engine API      url=[::]:8551 ws=true ws.compression=true
+[INFO] [05-01|13:34:07.049] JsonRpc endpoint opened                  ws=false ws.compression=true grpc=false http.url=[::]:8545
+[INFO] [05-01|13:34:07.094] [txpool] Started 
+[INFO] [05-01|13:34:07.100] [snapshots:download] Stat                blocks=1 indices=1 alloc=23.8MB sys=51.9MB
+[WARN] [05-01|13:34:07.109] NAT ExternalIP resolution has failed, try to pass a different --nat option err="no UPnP or NAT-PMP router discovered"
+[WARN] [05-01|13:34:07.117] NAT ExternalIP resolution has failed, try to pass a different --nat option err="no UPnP or NAT-PMP router discovered"
+[INFO] [05-01|13:34:07.123] [4/6 Execution] Done Commit every block  blk=0 blks=1 blk/s=49.7 txs=2 tx/s=99 gas/s=0 buf=0B/512.0MB stepsInDB=0.00 step=0.0 inMem=false alloc=26.4MB sys=51.9MB
+[INFO] [05-01|13:34:07.133] Started P2P networking                   version=67 self=enode://e5a9d394618f9d66c0f23db5b6c79ea40c81bdc342eb5d9ca3880d2ee2577b9b744b8094c5ef99b80f4b2f2c0d5ddbca72b9d26c75ff1fe7fcd4a36d32e1764d@127.0.0.1:30304 name=erigon/v3.00.0-57625b40/linux-amd64/go1.23.0
+[INFO] [05-01|13:34:07.142] Started P2P networking                   version=68 self=enode://e5a9d394618f9d66c0f23db5b6c79ea40c81bdc342eb5d9ca3880d2ee2577b9b744b8094c5ef99b80f4b2f2c0d5ddbca72b9d26c75ff1fe7fcd4a36d32e1764d@127.0.0.1:30303 name=erigon/v3.00.0-57625b40/linux-amd64/go1.23.0
+[INFO] [05-01|13:35:25.854] Got interrupt, shutting down... 
+[INFO] [05-01|13:35:25.854] Got interrupt, shutting down...          sig=terminated
+[INFO] [05-01|13:35:25.854] Exiting... 
+[INFO] [05-01|13:35:25.854] Exiting Engine... 
+[INFO] [05-01|13:35:25.854] RPC server shutting down 
+[INFO] [05-01|13:35:25.854] HTTP endpoint closed                     url=[::]:8545
+[INFO] [05-01|13:35:25.854] RPC server shutting down 
+[INFO] [05-01|13:35:25.854] RPC server shutting down 
+[INFO] [05-01|13:35:25.854] Engine HTTP endpoint close               url=[::]:8551
+[INFO] [05-01|13:35:25.856] [txpool] stopped 
+[INFO] [05-01|13:35:25.856] devp2p txn pool goroutine terminated 
