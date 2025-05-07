@@ -1,0 +1,66 @@
+welcome to the blockchain readme!
+
+
+
+FILES - 
+- genesis.json : responsible for initializing blockchain, considering genesis state parameters including consensus, such as PoA through clique, gas, block difficulty, and inital block data (largely empty in this case).
+- jwt.hex : contains the jwt secret used to authenticate comms from execution and consensus layers.
+- password.txt : plaintext password for unlocking main geth instance
+- password2.txt : plaintext password for unlocking other geth instances
+- rip-n-repeat.sh : script file that would re-instansiate stack to automate repetative blockchain set-up and teardown.
+- start-geth.sh : starts main geth instance with custom commands, parameters, and considers password.txt and specially compiled geth
+- start-erigon.sh : starts erigon instance with custom commands, parameters, and considers specially compiled erigon
+- start-babygeth.sh : starts validation geth instances with custom commands, parameters, and considers password.txt and specially compiled geth
+- startup-script.sh : initial script for first-time creation of blockchain. this was unused after moving to geth for bootnodes rather than single mining.
+- *.logs : all log files for new running instances
+
+
+
+blockchain tech stack -
+
++----------------------------------------+
+|  Frontend (React, Ethers.js, web3.js)  | <-- webdev team									| out-of-scope
++----------------------------------------+
+|  Web3 API (Erigon RPC)                 | <-- for user access, metamask integration, and transaction relays			| implemented
++----------------------------------------+
+|  Smart Contracts (Solidity, Hardhat) 	 | <-- on-chain logic, asset management, and execution rules				| implemented
++----------------------------------------+
+|  Indexing Layer (The Graph, Subsquid)  | <-- optimized b.c. querying (disk I/O saver)						| unneeded, after 40 GbE link
++----------------------------------------+
+|  Execution Layer (Erigon)    	         | <-- process transactions, execute smart contracts, maintain state transitions	| implemented
++----------------------------------------+
+|  Consensus Layer (Clique)	         | <-- validation through PoA to maintain blockchain consensus				| implemented
++----------------------------------------+
+|  Bootnodes (Geth Bootnode)             | <-- peer discovery for connectivity and redundancy of consensus nodes		| implemented
++----------------------------------------+
+|  Storage (PostgreSQL)     	         | <-- stores blockchain data								| unneeded, execution layer automates
++----------------------------------------+
+|  Infrastructure (K8s, Terraform)       | <-- deployment management (optional)							| unneeded, single machine used
++----------------------------------------+
+|  Monitoring (Grafana, Loki)            | <-- real-time node health (optional)							| unneeded, out-of-scope
++----------------------------------------+
+|  Security (HashiCorp Vault, WAF)       | <-- secret management services (optional)						| unneeded, out-of-scope
++----------------------------------------+
+
+
+
+
+hardware and networking - 
+
+we deployed our system on a hypervisor provided by the NMT CS Department, hosted on a remote physical machine with:
+
+- 64 cores
+- 256 GB RAM
+- 1 TB SAN storage with a 40 GbE link
+
+we configured tunneling for remote access to the hypervisor, which hosted two key virtual machines:
+
+webbox (8 cores, 16 GB RAM):
+
+ran nginx on bare-metal debian 12 to serve our frontend. nginx was chosen for its lightweight performance and ability to serve static and dynamic content. we obtained a domain from NMT: `casino.cs.nmt.edu`, and self-signed an SSL cert for HTTPS access. however, NMT's ITC restricted most ports, limiting us to 80 and 443, which after persistance, was begrudgingly granted.
+
+blockchain (56 cores, 240 GB RAM):
+
+designed to host our private testnet blockchain. required significant I/O throughput for block data and concurrent cache. ran debian 12 bare-metal, with multiple segregated go instances running Geth and Erigon. we configured dynamic ports for bootnode discovery and PoA validation for cross-instance communication and . 
+
+we later enabled public access via `blockchain.cs.nmt.edu` to expose our erigon RPC for metamask integration. however, NMT's port hardening blocked critical ports used by geths bootnode discovery, breaking consensus-layer communication.
